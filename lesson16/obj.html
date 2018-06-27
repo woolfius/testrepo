@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+     <title>Title</title> 
+	 <style>
+ </style>
+</head>
+<body>
+</body>
+	<script>
+	
+	var obj={};
+	obj.name="Natalia";
+	obj.city="Lviv";
+	obj.address=101;
+	alert(obj.name+" from "+obj.city); //obj["city"]
+	
+	delete obj.city;
+	alert(obj.city);
+	//undefind при любих, навіть не оголошених властивостях. Так само і в звичайних масивах.
+	
+	if("city" in obj){
+		alert(obj.city); // перевірка на існування
+	}
+	else{
+		alert("empty");
+	}
+	
+	//
+	
+	
+	var obj={
+		name:"Natalia",
+		city:"Lviv",
+		"date of birth":"11.08.2015" //якщо ім'я створюється без правил то в лапках
+	}
+	
+	//obj.date of birth //не можна
+	
+	obj["date of birth"]="01.05.2014"; // можна
+	obj.country="Ukraine";
+	
+	//
+	
+	var obj={
+		name:"Natalia",
+		city:"Lviv",
+		"date of birth":"11.08.2015"
+	}
+	var x='city'; // записали властивість в змінну;
+	
+	if("city" in obj){
+		alert(obj[x]);//через крапку не можна
+		alert(x);
+	}
+	else{
+		alert("empty");
+	}
+	
+	//
+	
+	var obj={
+		name:"Natalia",
+		city:"Lviv",
+		"date of birth":{ //об'єкт в об'єкті (композиція)
+			date:11,
+			month:"august",
+			year:2015
+		}
+	}
+    
+    alert(obj["date of birth"].month);//["month"] 
+        
+    //
+    
+    var car = {
+        mark:'audi',
+        color:'black',
+        material:'metal'
+    }
+    
+    var engine = {
+        color: 'white',
+        oboroty: 6000
+    }
+    
+    car.engine = engine; // Агрегація
+        
+	//
+	
+	var obj={
+		name:"Natalia",
+		city:"Lviv",
+		date:11,
+		month:"august",
+		year:2015
+	}
+    
+	for(var key in obj){ // кей перебере у себе всі властивості обєкта
+		alert(obj[key]);//.key не можна і через звичайний цикл теж
+		alert(key);
+	}
+	
+	
+	// Обєкти копіюються ссилками 1. Value Type (примітиви) 2.Reference Type (обєкти)
+	
+	
+	
+	var obj={
+		name:"Natalia",
+		city:"Lviv",
+		date:11,
+		month:"august",
+		year:2015
+	}
+	
+	var obj2=obj; // друга ссилка на об'єкт obj
+	
+	
+	//
+	
+	var obj={
+		name:"Natalia",
+		city:"Lviv",
+		date:11,
+		month:"august",
+		year:2015
+	}
+	var obj2={};
+	for(var key in obj){
+		obj2[key]=obj[key];// скопіює у новий обєкт всі значення першого і сформує окремий об'єкт
+	}
+	
+	// функція конструктор як спосіб створення обєкта
+	
+	
+	
+	function f(){
+		document.write(this.name+" from "+this.city);//метод show об'єкта Student
+	}
+	
+	function Student(){ // функція конструктор
+		this.name="Natalia";
+		this.city="Lviv";
+		this.year=2015;
+		this.date=11;
+		this.month="august";
+		this.show=f; // передача функції властивості show (сформований метод)
+	}
+	var obj=new Student();//записали в змінну об'єкт Student
+	alert(obj.city);
+	var fedya = new Student();
+	obj.show();//викликали метод show об'єкту Student
+	
+	
+	//
+	
+	
+	
+	
+	function Student(name,city,date,month,year){
+		var self = this;
+		self.name=name || 'user'; // Користувач сам записує значення у властивості об'єкта
+		self.city=city || 'Skyrim';
+		self.date=date;
+		self.month=month;
+		self.year=year;
+		self.show=function(){
+			document.write(self.name+" from "+self.city);
+		};
+	}
+	var obj=new Student('Mr. Anderson','Matrix','12','08','2003');
+	var obj2=new Student();
+	alert(obj.city);
+	obj.show();
+	obj2.show();//інший тип даних
+	//obj.show();
+	
+	//
+	
+	function f(){
+		document.write(this.name+" from "+this.city);
+	}
+	
+	function Student(){
+		this.name=prompt("Enter name"); 
+		this.city=prompt("Enter city");
+		this.date=prompt("Enter date");
+		this.month=prompt("Enter month");
+		this.year=prompt("Enter year");
+		this.show=f;
+	}
+	
+	var arr=[];
+	for(var i=0;i<10;i++){
+		arr[i]=new Student(); // запис об'єкту в масив
+	}
+	
+	alert(arr[2].city); // дістаєм потрібний об'єкт і його властивість
+	
+        //5
+        
+        //1,2,3,4,5
+        //+ + + + +    
+        //6,7,8,9,10
+        //7,9,11,13,15
+	</script>
+</html>
